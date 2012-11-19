@@ -1,5 +1,4 @@
 Welcome to our new help pages, refreshed and consolidated from our various blog posts. Be hope they will be usefull both as a sequential read for newcomers and as a reference for our existing users.
-
 ## [Genesis of SymbolSource - *PDBs, debugging, symstore.exe and pain*](Genesis)
 
 When source code is compiled on Microsoft platforms, whether into native machine code (as with C or C++) or an intermediate language (as with C#), information that would normally be lost in this process, such as line-to-instruction mappings used by debuggers for source-stepping, is saved into PDB files, also known as symbol files. Symbols are normally placed alongside compiled DLL and EXE files and read from there, but Visual Studio, WinDbg and other programs implement the SRCSRV protocol, by which they can download matching symbols and sources on demand from remote servers. This lets them get those missing mappings for assemblies only provided in binary form.
@@ -71,6 +70,3 @@ Should you have any questions or issues while using SymbolSource, there are a fe
 1. [Start a discussion in our Google Group](http://groups.google.com/group/symbolsource)
 1. [E-mail us a support request directly](mailto:symbolsource@symbolsource.org)
 1. Ask us on Twitter:  [@TripleEmcoder](http://twitter.com/TripleEmcoder) or [@BenekDlugonogi](http://twitter.com/BenekDlugonogi)
-
-
-
