@@ -1,12 +1,16 @@
 <h2>What choices do I have?</h2>
+
 <p>Depending on your needs, you can use the following editions of SymbolSource.</p>
+
 <table id="choices">
-    <col style="width: 15%"/>
-    <col style="width: 17%; text-align: center"/>
-    <col style="width: 17%; text-align: center"/>
-    <col style="width: 17%; text-align: center"/>
-    <col style="width: 17%; text-align: center"/>
-    <col style="width: 17%; text-align: center"/>
+    <colgroup>
+        <col style="width: 15%" />
+        <col style="width: 17%; text-align: center" />
+        <col style="width: 17%; text-align: center" />
+        <col style="width: 17%; text-align: center" />
+        <col style="width: 17%; text-align: center" />
+        <col style="width: 17%; text-align: center" />
+    </colgroup>
     <thead>
         <tr>
             <th></th>
@@ -15,7 +19,7 @@
             <th>Server.Basic</th>
             <th>Embedded Edition</th>
             <th>Deployable Instance</th>
-        </tr>        
+        </tr>
     </thead>
     <tbody>
         <tr>
@@ -25,11 +29,11 @@
             <th><a href="http://www.symbolsource.org/Public/Documentation/Basic">learn to set it up</a></th>
             <th><a href="mailto:symbolsource@symbolsource.org?subject=SymbolSource+Embedded">contact us</th>
             <th><a href="mailto:symbolsource@symbolsource.org?subject=SymbolSource+Deployable">contact us</th>
-        </tr>       
+        </tr>
         <tr>
             <th>Feature set</th>
             <td>Hosting packages, symbols and sources in public and private repositories on <strong>SymbolSource.org</strong>.</td>
-            <td>Managing users and repositories under a <strong>separate, cloud-based instance</strong> of SymbolSource.</td> 
+            <td>Managing users and repositories under a <strong>separate, cloud-based instance</strong> of SymbolSource.</td>
             <td>On-premise hosting of symbols and sources in <strong>5 simple steps</strong>, similar to Install-Package NuGet.Server.</td>
             <td>Embedding symbol and source server capabilities in <strong>other commercial applications</strong>.</td>
             <td>Hosting packages, symbols and sources in <strong>your own cloud or on-premise</strong> infrastructure.</td>
@@ -51,7 +55,7 @@
             <td>unlimited</td>
         </tr>
         <tr>
-            <th>Number of private repositories</th>
+            <th>Number of private repositories, projects or versions</th>
             <td><a href="http://www.symbolsource.org/Public/Account/Register">choose a plan</a></td>
             <td>unlimited</td>
             <td>1</td>
@@ -76,25 +80,142 @@
         </tr>
     </tbody>
 </table>
-
 <script type="text/javascript">
     $("#choices").tableColWidth();
 </script>
 
-<h2>How much does it cost?<h2>
-<table>
+<h2>How much does it cost?</h2>
 
-</table>
+<style type="text/css">
+    .column
+    {
+        width: 50%;
+        display: inline-block;
+        vertical-align: top;
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+
+    .column.left { padding-left: 0; }
+    .column.right { padding-right: 0; }
+    .column h3 { margin-top: 0; }
+</style>
+
+<div class="column left">
+    <h3>Regular accounts</h3>
+    <p>With regular accounts in the Public instance, you can choose between plans varying by the number of allowed permission rules restriciting access to repositories, projects or versions.</p>
+    <table class="plans">
+        <colgroup>
+            <col style="width: 25%" />
+            <col style="width: 25%; text-align: right" />
+            <col style="width: 25%; text-align: right" />
+            <col style="width: 25%; text-align: right" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Users</th>
+                <th>Permissions</th>
+                <th>Monthly fee</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Free</td>
+                <td>1</td>
+                <td>0</td>
+                <td>free-as-in-beer</td>
+            </tr>
+            <tr>
+                <td>Starter</td>
+                <td>1</td>
+                <td>1</td>
+                <td>5 EUR</td>
+            </tr>
+            <tr>
+                <td>Small</td>
+                <td>1</td>
+                <td>10</td>
+                <td>19 EUR</td>
+            </tr>
+            <tr>
+                <td>Medium</td>
+                <td>1</td>
+                <td>20</td>
+                <td>29 EUR</td>
+            </tr>
+        </tbody>
+    </table>
+</div><div class="column right">
+    <h3>Company accounts</h3>
+    <p>With company accounts (separate instances), you can choose between plans varying by the number of allowed users with unlimited repositories and permission rules.</p>
+    <table class="plans">
+        <colgroup>
+            <col style="width: 25%" />
+            <col style="width: 25%; text-align: right" />
+            <col style="width: 25%; text-align: right" />
+            <col style="width: 25%; text-align: right" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Users</th>
+                <th>Permissions</th>
+                <th>Monthly fee</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Starter</td>
+                <td>5</td>
+                <td>unlimited</td>
+                <td>19 EUR</td>
+            </tr>
+            <tr>
+                <td>Small</td>
+                <td>10</td>
+                <td>unlimited</td>
+                <td>149 EUR</td>
+            </tr>
+            <tr>
+                <td>Medium</td>
+                <td>30</td>
+                <td>unlimited</td>
+                <td>399 EUR</td>
+            </tr>
+            <tr>
+                <td>Large</td>
+                <td>50</td>
+                <td>unlimited</td>
+                <td>599 EUR</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+    $(".plans").tableColWidth();
+</script>
+
+<h3>Notes</h3>
+<ul>
+    <li>All plans are provided with unlimited disk space and a free one month trial.</li>
+    <li><a href="mailto:symbolsource@symbolsource.org?subject=SymbolSource+Custom">Contact us</a> if you need anything custom.</li>
+    <li>Payments are processed as PayPal subscriptions.</li>
+</ul>
 
 <h2>What do I get?</h2>
+
 <p>Summed up, the main functionality of various SymbolSource editions covers the following areas.</p>
+
 <table id="matrix">
-    <col style="width: 50%"/>
-    <col style="width: 10%; text-align: center; vertical-align: middle"/>
-    <col style="width: 10%; text-align: center; vertical-align: middle"/>
-    <col style="width: 10%; text-align: center; vertical-align: middle"/>
-    <col style="width: 10%; text-align: center; vertical-align: middle"/>
-    <col style="width: 10%; text-align: center; vertical-align: middle"/>
+    <colgroup>
+        <col style="width: 50%" />
+        <col style="width: 10%; text-align: center; vertical-align: middle" />
+        <col style="width: 10%; text-align: center; vertical-align: middle" />
+        <col style="width: 10%; text-align: center; vertical-align: middle" />
+        <col style="width: 10%; text-align: center; vertical-align: middle" />
+        <col style="width: 10%; text-align: center; vertical-align: middle" />
+    </colgroup>
     <thead>
         <tr>
             <th></th>
@@ -107,7 +228,7 @@
     </thead>
     <tbody>
         <tr>
-            <td>Serving symbols (PDB files) and sources on-demand to @VisualStudio(), @WinDbg() and other software compatible with the @SrcSrv() protocol</td>
+            <td>Serving symbols (PDB files) and sources on-demand to Visual Studio, WinDbg and other software compatible with the SRCSRV protocol</td>
             <td><img src="Tick.png" alt="Yes" /></td>
             <td><img src="Tick.png" alt="Yes" /></td>
             <td><img src="Tick.png" alt="Yes" /></td>
@@ -131,7 +252,7 @@
             <td><img src="Tick.png" alt="Yes" /></td>
         </tr>
         <tr>
-            <td>Hosting repositories of @NuGet() and @OpenWrap() packages in addition to symbol/source only repositories</td>
+            <td>Hosting repositories of NuGet and OpenWrap packages in addition to symbol/source only repositories</td>
             <td><img src="Tick.png" alt="Yes" /></td>
             <td><img src="Tick.png" alt="Yes" /></td>
             <td></td>
@@ -155,7 +276,7 @@
             <td><img src="Tick.png" alt="Yes" /></td>
         </tr>
         <tr>
-            <td>Exposing a management interface to all content and metadata through the web site and a @SoapApi()</td>
+            <td>Exposing a management interface to all content and metadata through the web site and a SOAP API</td>
             <td><img src="Tick.png" alt="Yes" /></td>
             <td><img src="Tick.png" alt="Yes" /></td>
             <td></td>
@@ -171,7 +292,7 @@
             <td><img src="Tick.png" alt="Yes" /></td>
         </tr>
         <tr>
-            <td>Integrated with @NuGetOrg() and @MyGetOrg()</td>
+            <td>Integrated with nuget.org and myget.org</td>
             <td><img src="Tick.png" alt="Yes" /></td>
             <td><img src="Tick.png" alt="Yes" /></td>
             <td></td>
@@ -179,17 +300,15 @@
             <td></td>
         </tr>
         <tr>
-            <td>Providing out of the box integration with any @NuGetGallery() instance</td>
+            <td>Providing out of the box integration with any NuGet Gallery instance</td>
             <td></td>
             <td><img src="Tick.png" alt="Yes" /></td>
             <td></td>
             <td></td>
             <td><img src="Tick.png" alt="Yes" /></td>
         </tr>
-    </tbody>    
+    </tbody>
 </table>
-
-
 <script type="text/javascript">
     $("#matrix").tableColWidth();
 </script>
