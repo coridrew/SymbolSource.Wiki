@@ -24,34 +24,49 @@ Authenticated URLs also let you access symbols and sources stored in private rep
 
 To configure Visual Studio for symbol/server use, follow these instructions:
  
-<ol> 
-    <li>Go to Tools -> Options -> Debugger -> General.</li> 
-    <li>Uncheck “Enable Just My Code (Managed only)”.</li> 
-    <li>Uncheck “Enable .NET Framework source stepping”. Yes, it is misleading, but if you don't, then Visual Studio will ignore your custom server order (see further on) and only use it's own servers.</li> 
-    <li>Check “Enable source server support”.</li> 
-    <li>Uncheck “Require source files to exactly match the original version”</li> 
-    <li>Go to Tools -> Options -> Debugger -> Symbols.</li> 
-    <li>Select a folder for the local symbol/source cache. You may experience silent failures in getting symbols if it doesn't exist or is read-only for some reason.</li> 
-    <li>Add symbol servers under “Symbol file (.pdb) locations”. Pay attention to the correct order, because some servers may contain symbols for the same binaries: with or without sources. We recommend the following setup:
-        <ul> 
-            <li><code>http://referencesource.microsoft.com/symbols</code></li> 
-            <li><code>http://srv.symbolsource.org/pdb/Public</code> or the authenticated variant (see above)</li> 
-            <li><code>http://srv.symbolsource.org/pdb/MyGet</code> or the authenticated variant (see above)</li> 
-            <li>(other symbol servers with sources)</li> 
-            <li><code>http://msdl.microsoft.com/download/symbols</code></li> 
-            <li>(other symbol servers without sources)</li> 
-        </ul>
-     </li> 
-</ol> 
+1. Go to Tools -> Options -> Debugger -> General.
+
+ * Uncheck *Enable Just My Code (Managed only)*.
+ * Uncheck *Enable .NET Framework source stepping*. Yes, it is misleading, but see below for an explanation.
+ * Check *Enable source server support*.
+ * Uncheck *Require source files to exactly match the original version*.
+
+1. Go to Tools -> Options -> Debugger -> Symbols.
+1. Select a folder for the local symbol/source cache. You may experience silent failures in getting symbols if it doesn't exist or is read-only for some reason.</li> 
+1. Add symbol servers under “Symbol file (.pdb) locations”. Pay attention to the correct order, because some servers may contain symbols for the same binaries: with or without sources. We recommend the following setup:
+
+ * Uncheck  *Microsoft Symbol Servers*. Another counterintuitive step, but see below for an explanation.
+ * `http://referencesource.microsoft.com/symbols`
+ * `http://srv.symbolsource.org/pdb/Public` or the authenticated variant (see above)
+ * `http://srv.symbolsource.org/pdb/MyGet` or the authenticated variant (see above)
+  * (other symbol servers with sources)
+  * `http://msdl.microsoft.com/download/symbols` 
+  * (other symbol servers without sources)
+
+### Tips &amp; Tricks
+ 
+1. To speed up debug session startup it is recommended to go to Tools -> Options -> Debugger -> Symbols, select *Only specified modules* and enter appropriate assembly names in the dialog provided.
+1. When using a symbol server for some of your dependencies be sure **not** to have any other PDB files of those libraries present in the same directory as the DLL files. When debugging code using Library.dll, Visual Studio will always first load Library.pdb from the same directory, which will disable symbol and source server usage.
+1. To more effectively debug .NET Framework code it is useful to disable optimizations using the following command (environment variable): `set COMPLUS_ZapDisable=1`
+
+### Buts &amp; Whys
+
+#### Why do I need to uncheck *Enable .NET Framework source stepping*? 
+
+This is a very special feature of Visual Studio implemented a bit differently than the regular symbol loading. If you leave it on, Visual Studio will try downloading symbols for each project reference when you hit F5, before even starting the debugging session. Think of it as a precaching feature.
+
+Unfortunately it completly ignores your server order, and only goes to `http://referencesource.microsoft.com/symbols` for PDBs. What's more, it also caches negative hits (symbols not found, e.g. for NuGet packages), so you don't get to wait on the next F5 run, but it does so based on the assembly filename, not hash. So if you have an identical assembly in a different path, you'll need to wait again while Visual Studio confirms that Microsoft doesn't have its symbols. This feature also ignores the *Only specified modules* setting while loading symbols. 
+
+Then, during the debugging, you'll see this behaviour, depending on symbol loading settings:
+* *All modules, unless excluded* - precached symbols will load instantenously, but Visual Studio will still try downloading symbols for modules loaded into the process dynamically, that weren't references (e.g. with `Assermbly.Load` or the `Microsoft.VisualStudio`.* helpers),
+* *Only selected modules* - you will need to load the precached symbols manually from the Call Stack or Modules windows.
+
+All in all we find *Enable .NET Framework source stepping* a very confusing and pretty much useless feature.
+
+#### Why do I need to uncheck *Microsoft Symbol Servers*? 
+
+This is equivalent to `http://msdl.microsoft.com/download/symbols`, which is a symbol server that hosts source-less PDBs for a lot of Microsoft products, like Windows system libraries. It also hosts symbols for the .NET Framework, but not source-enabled, contrary to `http://referencesource.microsoft.com/symbols`. You might notice that this item cannot be reordered, it will always be the first, so it will get you the wrong symbols. Perhaps that's why Visual Studio has that *Enable .NET Framework source stepping* options, that downloads the right symbols out of order. Anyway, it's better to just use our entire recommended configuration than to try guessing what Microsoft had in mind here.
 
 ## Configuring \_NT\_SYMBOL\_PATH (WinDbg)
 
 ...
- 
-## Tips &amp; Tricks
- 
-<ol> 
-    <li><p>When using a symbol server for some of your dependencies be sure <strong>not</strong> to have any other PDB files of those libraries present in the same directory as the DLL files. When debugging code using Library.dll, Visual Studio will always first load Library.pdb from the same directory, which will disable symbol and source server usage.</p></li> 
-    <li><p>To more effectively debug .NET Framework code it is useful to disable optimizations using the following command (environment variable): <code>set COMPLUS_ZapDisable=1</code></p></li> 
-    <li><p>To speed up debug session startup it is recommended to go to Tools -> Options -> Debugger -> Symbols, select “Only specified modules” and enter appropriate assembly names in the dialog provided.</p></li>
-</ol> 
